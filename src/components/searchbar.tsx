@@ -25,15 +25,20 @@ export default function Searchbar() {
   };
 
   return (
-    <form onSubmit={onSubmitHandler}>
+    <form onSubmit={onSubmitHandler} className="flex gap-[10px] mb-5">
       <input
         type="text"
         value={search}
         placeholder="검색어를 입력해주세요."
         onChange={onChangeHandler}
-        className="text-black"
+        className="flex-1 p-[15px] rounded-[5px] border-[1.5px] border-gray-700 text-white"
       />
-      <button type="submit">검색</button>
+      <button
+        type="submit"
+        className="w-[80px] rounded-[5px] border-none bg-gray-700 text-white cursor-pointer"
+      >
+        검색
+      </button>
     </form>
   );
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Link from "next/link";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -24,8 +25,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <p>Global Layout</p>
-        {children}
+        <div className="px-5 max-w-[800px] mx-auto">
+          <header className="py-5">
+            <Link
+              href={"/"}
+              className="text-red-600 font-bold text-xl cursor-pointer"
+            >
+              ONEBITE CINEMA
+            </Link>
+          </header>
+          {children}
+        </div>
       </body>
     </html>
   );
