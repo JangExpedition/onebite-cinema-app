@@ -1,13 +1,21 @@
 import MovieItem from "@/components/movie-item";
-import movies from "@/dummy.json";
+import { MovieData } from "@/interface/movie";
 
-export default function Page({
+export default async function Page({
   searchParams,
 }: {
   searchParams: { q?: string };
 }) {
   const q = searchParams.q as string;
-  const result = movies.filter((movie) => movie.title.includes(q));
+  const url = `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/search?q=${q}`;
+  const response = await fetch(url, { cache: "no-cache" });
+
+  if (!response.ok) {
+    return <div>오류가 발생했습니다!</div>;
+  }
+
+  const result: MovieData[] = await response.json();
+
   return (
     <div className="grid grid-cols-3 gap-[5px]">
       {result.map((movie) => (
