@@ -3,7 +3,7 @@ import { MovieData } from "@/interface/movie";
 
 async function AllMovies() {
   const url = `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie`;
-  const response = await fetch(url, { cache: "force-cache" });
+  const response = await fetch(url, { cache: "no-cache" });
 
   if (!response.ok) {
     return <div>오류가 발생했습니다!</div>;
