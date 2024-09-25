@@ -1,8 +1,7 @@
-import { MovieData } from "@/interface/movie";
 import { notFound } from "next/navigation";
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const id = Number(params.id);
+  const id = params.id;
   const url = `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/${id}`;
   const response = await fetch(url, { cache: "force-cache" });
 
