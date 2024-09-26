@@ -1,4 +1,22 @@
+import { MovieData } from "@/interface/movie";
 import { notFound } from "next/navigation";
+
+export async function generateStaticParams() {
+  const url = `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/`;
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error();
+  }
+
+  const movies: MovieData[] = await response.json();
+
+  const result = movies.reduce(
+    (acc: { id: string }[], cur) => [...acc, { id: `${cur.id}` }],
+    []
+  );
+
+  return result;
+}
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = params.id;
