@@ -1,6 +1,8 @@
 import { MovieData } from "@/interface/movie";
 import { notFound } from "next/navigation";
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const url = `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/`;
   const response = await fetch(url);
