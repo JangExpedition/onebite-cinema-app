@@ -1,7 +1,7 @@
 import MovieItem from "@/components/movie-item";
 import MovieItemSkeleton from "@/components/skeleton/movie-item-skeleton";
 import MovieListSkeleton from "@/components/skeleton/movie-list-skeleton";
-import { MovieData } from "@/interface/movie";
+import { MovieData } from "@/interface/type";
 import { delay } from "@/util/delay";
 import { Suspense } from "react";
 
@@ -11,7 +11,7 @@ async function AllMovies() {
   const response = await fetch(url, { cache: "force-cache" });
 
   if (!response.ok) {
-    return <div>오류가 발생했습니다!</div>;
+    throw new Error("fetch AllMovies failed: " + response.statusText);
   }
 
   const movies: MovieData[] = await response.json();
@@ -27,7 +27,7 @@ async function RandomMovies() {
   const response = await fetch(url, { next: { revalidate: 30 } });
 
   if (!response.ok) {
-    return <div>오류가 발생했습니다!</div>;
+    throw new Error("fetch ReandomMovies failed: " + response.statusText);
   }
 
   const randomMovies: MovieData[] = await response.json();

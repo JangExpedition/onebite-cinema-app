@@ -1,6 +1,6 @@
 import MovieItem from "@/components/movie-item";
 import MovieListSkeleton from "@/components/skeleton/movie-list-skeleton";
-import { MovieData } from "@/interface/movie";
+import { MovieData } from "@/interface/type";
 import { delay } from "@/util/delay";
 import { Suspense } from "react";
 
@@ -10,7 +10,7 @@ export async function SearchResult({ q }: { q: string }) {
   const response = await fetch(url, { cache: "force-cache" });
 
   if (!response.ok) {
-    return <div>오류가 발생했습니다!</div>;
+    throw new Error("fetch SearchResult failed: " + response.statusText);
   }
 
   const result: MovieData[] = await response.json();

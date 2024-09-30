@@ -1,4 +1,6 @@
-import { MovieData } from "@/interface/movie";
+import ReviewEditor from "@/components/review-editor";
+import ReviewList from "@/components/review-list";
+import { MovieData } from "@/interface/type";
 import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
@@ -18,16 +20,15 @@ export async function generateStaticParams() {
   return result;
 }
 
-export default async function Page({ params }: { params: { id: string } }) {
-  const id = params.id;
-  const url = `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/${id}`;
+async function MovieDetail({ movieId }: { movieId: string }) {
+  const url = `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/${movieId}`;
   const response = await fetch(url, { cache: "force-cache" });
 
   if (!response.ok) {
     if (response.status === 404) {
       return notFound();
     }
-    return <div>오류가 발생했습니다!</div>;
+    throw new Error("Movie Detial fetch failed: " + response.statusText);
   }
 
   const {
@@ -64,6 +65,17 @@ export default async function Page({ params }: { params: { id: string } }) {
           <div className="leading-relaxed">{description}</div>
         </div>
       </div>
+    </div>
+  );
+}
+
+export default async function Page({ params }: { params: { id: string } }) {
+  const movieId = params.id;
+  return (
+    <div className="flex flex-col gap-6">
+      <MovieDetail movieId={movieId} />
+      <ReviewEditor movieId={movieId} />
+      <ReviewList movieId={movieId} />
     </div>
   );
 }
