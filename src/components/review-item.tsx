@@ -1,4 +1,5 @@
 import { ReviewData } from "@/interface/type";
+import ReviewItemDeleteButton from "./review-item-delete-button";
 
 function dateFormat(date: string) {
   let result = new Date(date).toLocaleDateString();
@@ -44,7 +45,9 @@ export default function ReviewItem({
       </div>
       <div className="py-2">{content}</div>
       <div>
-        <button className="underline cursor-pointer">🗑️ 리뷰 삭제하기</button>
+        <div className="underline cursor-pointer">
+          <ReviewItemDeleteButton reviewId={id} movieId={movieId} />
+        </div>
       </div>
     </div>
   );

@@ -21,8 +21,10 @@ export async function generateStaticParams() {
 }
 
 async function MovieDetail({ movieId }: { movieId: string }) {
-  const url = `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/${movieId}`;
-  const response = await fetch(url, { cache: "force-cache" });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/${movieId}`,
+    { next: { tags: [`review-${movieId}`] } }
+  );
 
   if (!response.ok) {
     if (response.status === 404) {

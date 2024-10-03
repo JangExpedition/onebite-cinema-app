@@ -1,4 +1,4 @@
-import { MovieData } from "@/interface/movie";
+import { MovieData } from "@/interface/type";
 import Link from "next/link";
 
 export default function MovieItem(props: MovieData) {
