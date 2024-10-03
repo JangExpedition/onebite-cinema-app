@@ -1,14 +1,13 @@
 import MovieItem from "@/components/movie-item";
-import MovieItemSkeleton from "@/components/skeleton/movie-item-skeleton";
 import MovieListSkeleton from "@/components/skeleton/movie-list-skeleton";
 import { MovieData } from "@/interface/type";
-import { delay } from "@/util/delay";
 import { Suspense } from "react";
 
 async function AllMovies() {
-  await delay(3000);
-  const url = `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie`;
-  const response = await fetch(url, { cache: "force-cache" });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie`,
+    { cache: "force-cache" }
+  );
 
   if (!response.ok) {
     throw new Error("fetch AllMovies failed: " + response.statusText);
@@ -22,7 +21,6 @@ async function AllMovies() {
 }
 
 async function RandomMovies() {
-  await delay(1500);
   const url = `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/random`;
   const response = await fetch(url, { next: { revalidate: 30 } });
 
