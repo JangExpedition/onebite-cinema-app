@@ -4,16 +4,6 @@ import { MovieData } from "@/interface/type";
 import { Metadata } from "next";
 import { Suspense } from "react";
 
-export const metadata: Metadata = {
-  title: "한입 시네마",
-  description: "한입 시네마에 등록된 영화들을 만나보세요",
-  openGraph: {
-    title: "한입 시네마",
-    description: "한입 시네마에 등록된 영화들을 만나보세요",
-    images: ["/thumbnail.png"],
-  },
-};
-
 async function AllMovies() {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie`,
@@ -45,6 +35,16 @@ async function RandomMovies() {
     <MovieItem key={`random_${movie.id}`} {...movie} />
   ));
 }
+
+export const metadata: Metadata = {
+  title: "한입 시네마",
+  description: "한입 시네마에 등록된 영화들을 만나보세요",
+  openGraph: {
+    title: "한입 시네마",
+    description: "한입 시네마에 등록된 영화들을 만나보세요",
+    images: ["/thumbnail.png"],
+  },
+};
 
 export default function Home() {
   return (
