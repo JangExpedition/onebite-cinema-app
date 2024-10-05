@@ -41,9 +41,9 @@ async function RandomMovies() {
 
   const randomMovies: MovieData[] = await response.json();
 
-  return randomMovies
-    .slice(0, 3)
-    .map((movie) => <MovieItem key={`random_${movie.id}`} {...movie} />);
+  return randomMovies.map((movie) => (
+    <MovieItem key={`random_${movie.id}`} {...movie} />
+  ));
 }
 
 export default function Home() {

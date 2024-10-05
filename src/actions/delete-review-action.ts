@@ -1,6 +1,5 @@
 "use server";
 
-import { error } from "console";
 import { revalidateTag } from "next/cache";
 
 export async function deleteReveiwAction(_: any, formData: FormData) {

@@ -2,7 +2,7 @@
 import { createReviewAction } from "@/actions/create-review.action";
 import { useActionState, useEffect } from "react";
 
-export default function ReviewEditor({ movieId }: { movieId: number }) {
+export default function ReviewEditor({ movieId }: { movieId: string }) {
   const [state, formAction, isPending] = useActionState(
     createReviewAction,
     null

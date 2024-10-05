@@ -1,9 +1,10 @@
 import { ReviewData } from "@/interface/type";
 import ReviewItem from "./review-item";
 
-export default async function ReviewList({ movieId }: { movieId: number }) {
+export default async function ReviewList({ movieId }: { movieId: string }) {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/review/movie/${movieId}`
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/review/movie/${movieId}`,
+    { next: { tags: [`review-${movieId}`] } }
   );
   if (!response.ok) {
     throw new Error("fetch error: " + response.statusText);

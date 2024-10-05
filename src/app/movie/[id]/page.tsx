@@ -4,6 +4,8 @@ import ReviewList from "@/components/review-list";
 import { MovieData } from "@/interface/type";
 import { Metadata } from "next";
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie`
@@ -13,22 +15,21 @@ export async function generateStaticParams() {
   }
 
   const movies: MovieData[] = await response.json();
-
-  const result = movies.map((movie) => ({ id: movie.id.toString() }));
-
-  return result;
+  return movies.map((movie) => ({ id: movie.id.toString() }));
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: { id: number };
+  params: { id: string };
 }): Promise<Metadata | null> {
   const movieId = params.id;
 
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/${movieId}`,
-    { next: { tags: [`review-${movieId}`] } }
+    {
+      cache: "force-cache",
+    }
   );
 
   if (!response.ok) {
@@ -48,7 +49,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params }: { params: { id: number } }) {
+export default async function Page({ params }: { params: { id: string } }) {
   const movieId = params.id;
   return (
     <div className="flex flex-col gap-6">
