@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-export default async function MovieDetail({ movieId }: { movieId: string }) {
+export default async function MovieDetail({ movieId }: { movieId: number }) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/${movieId}`,
     { next: { tags: [`review-${movieId}`] } }

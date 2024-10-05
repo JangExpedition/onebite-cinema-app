@@ -1,7 +1,18 @@
 import MovieItem from "@/components/movie-item";
 import MovieListSkeleton from "@/components/skeleton/movie-list-skeleton";
 import { MovieData } from "@/interface/type";
+import { Metadata } from "next";
 import { Suspense } from "react";
+
+export const metadata: Metadata = {
+  title: "한입 시네마",
+  description: "한입 시네마에 등록된 영화들을 만나보세요",
+  openGraph: {
+    title: "한입 시네마",
+    description: "한입 시네마에 등록된 영화들을 만나보세요",
+    images: ["/thumbnail.png"],
+  },
+};
 
 async function AllMovies() {
   const response = await fetch(
